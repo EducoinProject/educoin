@@ -197,6 +197,8 @@ void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blo
     CBitcoinAddress chaddy("ETuy6CiZD5LKJ4zTSeJ3FgdLQkvC4Exnge"); // newversion
     CScript vchaddy = GetScriptForDestination(chaddy.Get()); // newversion
 
+    txNew.vout[0].nValue = blockReward;
+
     CTxOut txoutchaddyret = CTxOut(chaddyreward, vchaddy); // newversion
     txNew.vout.push_back(txoutchaddyret); // newversion
 
