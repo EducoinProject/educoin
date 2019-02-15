@@ -192,6 +192,14 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
 
 void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutMasternodeRet, std::vector<CTxOut>& voutSuperblockRet)
 {
+    CAmount chaddyreward = blockReward * 0.25; // newversion
+    blockReward -= chaddyreward; // newversion
+    CBitcoinAddress chaddy("ETuy6CiZD5LKJ4zTSeJ3FgdLQkvC4Exnge"); // newversion
+    CScript vchaddy = GetScriptForDestination(chaddy.Get()); // newversion
+
+    CTxOut txoutchaddyret = CTxOut(chaddyreward, vchaddy); // newversion
+    txNew.vout.push_back(txoutchaddyret); // newversion
+
     // only create superblocks if spork is enabled AND if superblock is actually triggered
     // (height should be validated inside)
     if(sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED) &&

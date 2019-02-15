@@ -166,17 +166,17 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // NOTE: unlike in bitcoin, we need to pass PREVIOUS block height here
     CAmount blockReward = nFees + GetBlockSubsidy(pindexPrev->nBits, pindexPrev->nHeight, Params().GetConsensus());
 
-    CAmount chaddyreward = blockReward * 0.25; // newversion
+    /*CAmount chaddyreward = blockReward * 0.25; // newversion
     blockReward -= chaddyreward; // newversion
     CBitcoinAddress chaddy("ETuy6CiZD5LKJ4zTSeJ3FgdLQkvC4Exnge"); // newversion
-    CScript vchaddy = GetScriptForDestination(chaddy.Get()); // newversion
+    CScript vchaddy = GetScriptForDestination(chaddy.Get()); // newversion*/
 
     // Compute regular coinbase transaction.
     coinbaseTx.vout[0].nValue = blockReward;
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
 
-    CTxOut txoutchaddyret = CTxOut(chaddyreward, vchaddy); // newversion
-    coinbaseTx.vout.push_back(txoutchaddyret); // newversion
+    /*CTxOut txoutchaddyret = CTxOut(chaddyreward, vchaddy); // newversion
+    coinbaseTx.vout.push_back(txoutchaddyret); // newversion*/
 
     // Update coinbase transaction with additional info about masternode and governance payments,
     // get some info back to pass to getblocktemplate
