@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Educoin Core
+Comment=Educoin P2P Cryptocurrency
+Comment[de]=Verbinde mit dem Educoin peer-to-peer Netzwerk
+Comment[fr]=Educoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Educoin, eşten eşe kriptografik sanal para birimi
+Exec=educoin-qt %u
+Terminal=false
+Type=Application
+Icon=educoin128
+MimeType=x-scheme-handler/educoin;
+Categories=Office;Finance;

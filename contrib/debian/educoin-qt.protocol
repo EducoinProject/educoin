@@ -1,0 +1,11 @@
+[Protocol]
+exec=educoin-qt '%u'
+protocol=educoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

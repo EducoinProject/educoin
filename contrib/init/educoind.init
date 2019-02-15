@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  educoind The Educoin Core server.
+#
+#
+# chkconfig: 345 80 20
+# description: educoind
+# processname: educoind
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/educoind, see below
+if [ -f /etc/sysconfig/educoind ]; then
+        . /etc/sysconfig/educoind
+fi
+
+RETVAL=0
+
+prog=educoind
+# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/educoind
+lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/educoind}
+
+# educoind defaults to /usr/bin/educoind, override with BITCOIND_BIN
+educoind=${BITCOIND_BIN-/usr/bin/educoind}
+
+# educoind opts default to -disablewallet, override with BITCOIND_OPTS
+educoind_opts=${BITCOIND_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $educoind $educoind_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

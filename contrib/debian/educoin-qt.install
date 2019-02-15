@@ -1,0 +1,6 @@
+usr/local/bin/educoin-qt usr/bin
+share/pixmaps/educoin32.xpm usr/share/pixmaps
+share/pixmaps/educoin16.xpm usr/share/pixmaps
+share/pixmaps/educoin128.png usr/share/pixmaps
+debian/educoin-qt.desktop usr/share/applications
+debian/educoin-qt.protocol usr/share/kde4/services/
