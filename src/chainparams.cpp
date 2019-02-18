@@ -194,10 +194,10 @@ public:
         nDefaultPort = 6212;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1550245759, 171247, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1550500802, 1203101, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("0x00000561c14ac8af521a7a89196fb4715dcf390250d252e3325e14dd6d960e01"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000008c0b2cd9b55d7439a90efa8879d0eca9f93f1722acde8d25360b77ac847"));
         assert(genesis.hashMerkleRoot == uint256S("0x7e65a92877fbe6d6dd1cca6bdbc742051044477f87bb4652f61c7c14ce62e763"));
 
 
@@ -319,7 +319,27 @@ public:
 
         genesis = CreateGenesisBlock(1549785915UL, 2956236UL, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-
+        // calculate testnet genesis block
+        //consensus.hashGenesisBlock = uint256S("0x00");
+        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
+		std::cout << std::string("Calculating testnet genesis block...\n");
+            arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+            uint256 hash;
+            genesis.nNonce = 0;
+            while (UintToArith256(genesis.GetHash()) > hashTarget)
+            {
+                ++genesis.nNonce;
+                if (genesis.nNonce == 0)
+                {
+                    ++genesis.nTime;
+                }
+            }
+            std::cout << "Genesis block found!\n";
+            std::cout << "nonce: " << genesis.nNonce << "\n";
+            std::cout << "time: " << genesis.nTime << "\n";
+            std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
+            std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+        }
         assert(consensus.hashGenesisBlock == uint256S("0x000003a4016727b78a1acad0e8f5d04ac885b8ce52a131f3f738de7d71c30cbb"));
         assert(genesis.hashMerkleRoot == uint256S("0x7e65a92877fbe6d6dd1cca6bdbc742051044477f87bb4652f61c7c14ce62e763"));
 

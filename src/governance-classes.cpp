@@ -423,9 +423,7 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
             // TODO: PRINT NICE N.N EDU OUTPUT
 
             DBG( std::cout << "CSuperblockManager::CreateSuperblock Before LogPrintf call, nAmount = " << payment.nAmount << std::endl; );
-
             LogPrintf("NEW Superblock : output %d (addr %s, amount %d)\n", i, address2.ToString(), payment.nAmount);
-
             DBG( std::cout << "CSuperblockManager::CreateSuperblock After LogPrintf call " << std::endl; );
         } else {
             DBG( std::cout << "CSuperblockManager::CreateSuperblock Payment not found " << std::endl; );

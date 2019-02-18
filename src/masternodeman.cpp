@@ -1718,9 +1718,6 @@ void CMasternodeMan::WarnMasternodeDaemonUpdates()
         }
     }
 
-    if(nUpdatedMasternodes == 0)
-        return;
-
     // Warn only when at least half of known masternodes already updated
     if (nUpdatedMasternodes < size() / 2)
         return;
